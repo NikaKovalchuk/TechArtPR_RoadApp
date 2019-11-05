@@ -4,9 +4,12 @@ from django.db.models import (
     DateTimeField,
     DecimalField,
     IntegerField,
+    ManyToManyField,
     Model,
     TextField,
 )
+
+from api.models import Category
 
 
 class Location(Model):
@@ -24,5 +27,10 @@ class Location(Model):
     link = TextField(blank=True)
     price = IntegerField(null=True, blank=True)
 
+    categories = ManyToManyField(Category, blank=True)
+
     def __str__(self):
         return self.title
+
+    def get_categories(self):
+        return self.categories

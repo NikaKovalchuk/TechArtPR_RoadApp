@@ -1,12 +1,9 @@
 from django.db.models import (
-    DateTimeField,
     CharField,
-    ManyToManyField,
+    DateTimeField,
     Model,
     TextField,
 )
-
-from api.models import Location
 
 
 class Category(Model):
@@ -16,8 +13,6 @@ class Category(Model):
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
-
-    locations = ManyToManyField(Location, blank=True)
 
     def __str__(self):
         return self.title
