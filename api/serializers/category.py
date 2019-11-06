@@ -3,21 +3,27 @@ from rest_framework import serializers
 from api.models import Category
 
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategoryMinSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = (
+        fields = [
             'id',
             'title',
             'description',
-            'created_at',
-            'updated_at',
-        )
+        ]
+
+    def create(self, validated_data):
+        return Category.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.description = validated_data.get('description', instance.description)
+        instance.save()
+        return instance
 
 
-class CategoryMinSerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(CategoryMinSerializer):
 
-    class Meta:
-        model = Category
-        fields = ('id',)
+    class Meta(CategoryMinSerializer.Meta):
+        fields = '__all__'

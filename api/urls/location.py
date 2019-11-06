@@ -1,6 +1,11 @@
+from rest_framework.urlpatterns import format_suffix_patterns
+
 from api.views import *
 from django.urls import path
 
 urlpatterns = [
-    path('<int:pk>/', LocationAPI.as_view()),
+    path('', location_list),
+    path('<int:pk>/', location_detail),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

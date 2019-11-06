@@ -21,6 +21,3 @@ class Route(Model):
 
     def __str__(self):
         return self.title
-
-    def get_locations(self):
-        return self.locations
