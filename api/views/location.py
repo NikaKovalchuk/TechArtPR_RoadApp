@@ -1,44 +1,15 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
 from api.models import Location
 from api.serializers import LocationSerializer
 
 
-@api_view(['GET', 'POST'])
-def location_list(request):
-    if request.method == 'GET':
-        locations = Location.objects.all()
-        serializer = LocationSerializer(locations, many=True)
-        return Response(serializer.data)
-
-    elif request.method == 'POST':
-        serializer = LocationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def location_detail(request, pk):
-    try:
-        location = Location.objects.get(pk=pk)
-    except Location.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+class LocationList(ListCreateAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
 
-    if request.method == 'GET':
-        serializer = LocationSerializer(location)
-        return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = LocationSerializer(location, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        location.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class SnippetDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
