@@ -4,8 +4,8 @@ from api.views import *
 from django.urls import path
 
 urlpatterns = [
-    path('', location_list),
-    path('<int:pk>/', location_detail),
+    path('', LocationList.as_view()),
+    path('<int:pk>/', LocationDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

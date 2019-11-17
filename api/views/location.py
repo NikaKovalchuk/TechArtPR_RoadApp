@@ -10,6 +10,6 @@ class LocationList(ListCreateAPIView):
     serializer_class = LocationSerializer
 
 
-class SnippetDetail(RetrieveUpdateDestroyAPIView):
+class LocationDetail(RetrieveUpdateDestroyAPIView):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
