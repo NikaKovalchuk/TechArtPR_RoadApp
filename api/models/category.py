@@ -8,7 +8,7 @@ from django.db.models import (
 
 class Category(Model):
 
-    title = CharField(max_length=100, null=False)
+    title = CharField(max_length=100, blank=False, null=False)
     description = TextField(max_length=1000, blank=True)
 
     created_at = DateTimeField(auto_now_add=True)
