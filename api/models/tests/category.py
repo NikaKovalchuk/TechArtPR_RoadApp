@@ -1,6 +1,3 @@
-import string
-import random
-
 from django.db import IntegrityError
 from django.test import TestCase
 from api.models import Category
@@ -31,5 +28,3 @@ class CategoryTestCase(TestCase):
     def test_description_field_is_required(self):
         category = Category(description=None)
         self.assertRaises(IntegrityError, lambda: category.save())
-
-# Add test for length and default dates
