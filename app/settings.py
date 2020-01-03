@@ -25,7 +25,7 @@ SECRET_KEY = 'zsrwv9z+h3b@lzs0t17u8n9p1cd(h9#36)i+1+y^y3hc)yvv7u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', '192.168.0.104']
 
 
 # Application definition
@@ -41,6 +41,10 @@ INSTALLED_APPS = [
 
     "api",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
