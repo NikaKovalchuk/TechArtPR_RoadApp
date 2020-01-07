@@ -17,6 +17,7 @@ class Route(Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
+    image_link = TextField(blank=True)
     locations = ManyToManyField(Location, blank=True)
 
     def __str__(self):
