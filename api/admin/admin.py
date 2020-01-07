@@ -2,7 +2,7 @@ from django.contrib import admin
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'updated_at']
+    list_display = ['title', 'icon', 'updated_at']
     ordering = ['-updated_at']
     # actions = [make_published]
 

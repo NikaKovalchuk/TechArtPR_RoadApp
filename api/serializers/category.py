@@ -8,9 +8,8 @@ class CategoryMinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = [
-            'id',
             'title',
-            'description',
+            'icon'
         ]
 
     def create(self, validated_data):
@@ -18,7 +17,6 @@ class CategoryMinSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
         instance.save()
         return instance
 

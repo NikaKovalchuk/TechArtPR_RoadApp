@@ -9,7 +9,7 @@ from django.db.models import (
 class Category(Model):
 
     title = CharField(max_length=100, blank=False, null=False)
-    description = TextField(max_length=1000, blank=True)
+    icon = CharField(max_length=100, blank=False, null=False)
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
