@@ -10,7 +10,6 @@ class LocationList(ListCreateAPIView):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ['categories']
     search_fields = ['title']
 
     ordering_fields = '__all__'
@@ -23,11 +22,15 @@ class LocationList(ListCreateAPIView):
 
     def get_queryset(self):
         price = self.request.query_params.get('price', None)
+        category = self.request.query_params.get('category', None)
+        queryset = Location.objects.all()
+
         if price is not None:
-            price = [self.transform_price(x) for x in price.split(',')]
-            queryset = Location.objects.filter(price__in=price)
-        else:
-            queryset = Location.objects.all()
+            prices = [self.transform_price(x) for x in price.split(',')]
+            queryset = queryset.filter(price__in=prices)
+        if category is not None:
+            ids = [x for x in category.split(',')]
+            queryset = queryset.filter(categories__in=ids)
         return queryset
 
 
