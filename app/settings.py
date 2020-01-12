@@ -39,9 +39,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'mapwidgets',
 
     "api",
 ]
+
+GOOGLE_MAP_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
+
+MINSK_COORDINATES = [53.9006011, 27.558972]
+
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 20),
+        ("mapCenterLocation", MINSK_COORDINATES),
+        ("markerFitZoom", 13),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'BY'}})
+    ),
+    "GOOGLE_MAP_API_KEY": GOOGLE_MAP_API_KEY,
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
@@ -84,8 +99,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'api',
+        'USER': 'api_user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -112,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

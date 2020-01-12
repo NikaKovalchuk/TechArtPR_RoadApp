@@ -1,19 +1,28 @@
-from django.contrib import admin
+from django.contrib.admin import ModelAdmin, TabularInline
+from django.contrib.gis.db.models import PointField
+from mapwidgets import GooglePointFieldInlineWidget
+
+from api.forms import RouteAdminForm, Location
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(ModelAdmin):
     list_display = ['title', 'icon', 'updated_at']
     ordering = ['-updated_at']
-    # actions = [make_published]
 
 
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdminInline(TabularInline):
+    model = Location
+    extra = 0
+    formfield_overrides = {
+        PointField: {"widget": GooglePointFieldInlineWidget}
+    }
+
+
+class RouteAdmin(ModelAdmin):
     list_display = ['title', 'description', 'updated_at']
     ordering = ['-updated_at']
-    # actions = [make_published]
+    inlines = (LocationAdminInline,)
 
-
-class RouteAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'updated_at']
-    ordering = ['-updated_at']
-    # actions = [make_published]
+    def get_form(self, request, obj=None, **kwargs):
+        self.form = RouteAdminForm
+        return super(RouteAdmin, self).get_form(request, obj, **kwargs)

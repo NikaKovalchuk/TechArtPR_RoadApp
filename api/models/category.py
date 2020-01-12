@@ -2,7 +2,6 @@ from django.db.models import (
     CharField,
     DateTimeField,
     Model,
-    TextField,
 )
 
 

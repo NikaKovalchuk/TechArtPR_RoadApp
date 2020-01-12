@@ -10,7 +10,7 @@ class RouteList(ListCreateAPIView):
     queryset = Route.objects.all()
     serializer_class = RouteSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend]
-    filterset_fields = ['locations']
+    # filterset_fields = ['locations']
     search_fields = ['title']
 
     ordering_fields = '__all__'

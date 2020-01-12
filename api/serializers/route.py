@@ -1,11 +1,25 @@
 from rest_framework import serializers
 
-from api.models import Route
-from api.serializers import LocationMinSerializer
+from api.models import Route, Location
+
+
+class LocationSerializer(serializers.ModelSerializer):
+    latitude = serializers.SerializerMethodField()
+    longtitude = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Location
+        fields = ('latitude', 'longtitude')
+
+    def get_latitude(self, obj):
+        return obj.coordinates[0]
+
+    def get_longtitude(self, obj):
+        return obj.coordinates[1]
 
 
 class RouteSerializer(serializers.ModelSerializer):
-    locations = LocationMinSerializer(many=True)
+    locations = LocationSerializer(source='location_set', many=True)
 
     class Meta:
         model = Route
