@@ -12,7 +12,7 @@ class CategoryAdmin(ModelAdmin):
 
 class LocationAdminInline(TabularInline):
     model = Location
-    extra = 0
+    extra = 1
     formfield_overrides = {
         PointField: {"widget": GooglePointFieldInlineWidget}
     }
