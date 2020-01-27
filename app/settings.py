@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "api",
 ]
 
-GOOGLE_MAP_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
+GOOGLE_MAPS_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
 MINSK_COORDINATES = [53.9006011, 27.558972]
 
 MAP_WIDGETS = {
@@ -54,7 +54,8 @@ MAP_WIDGETS = {
         ("markerFitZoom", 15),
         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'BY'}})
     ),
-    "GOOGLE_MAP_API_KEY": GOOGLE_MAP_API_KEY,
+    "GOOGLE_MAP_API_KEY": GOOGLE_MAPS_API_KEY,
+    "LANGUAGE": 'ru',
 }
 
 REST_FRAMEWORK = {
