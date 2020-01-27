@@ -45,14 +45,13 @@ INSTALLED_APPS = [
 ]
 
 GOOGLE_MAP_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
-
 MINSK_COORDINATES = [53.9006011, 27.558972]
 
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (
-        ("zoom", 20),
+        ("zoom", 15),
         ("mapCenterLocation", MINSK_COORDINATES),
-        ("markerFitZoom", 13),
+        ("markerFitZoom", 15),
         ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'BY'}})
     ),
     "GOOGLE_MAP_API_KEY": GOOGLE_MAP_API_KEY,
@@ -107,6 +106,13 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# create user api_user with password 'password';
+# alter role api_user set client_encoding to 'utf8';
+# alter role api_user set default_transaction_isolation to 'read committed';
+# alter role api_user set timezone to 'UTC';
+# alter role api_user superuser;
+# create database api owner api_user;
 
 
 # Password validation
