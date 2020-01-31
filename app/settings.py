@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
-    'mapwidgets',
+    'django_google_maps',
 
-    "api",
+    "api.route",
+    "api.locations",
+    "api.category",
 ]
 
 GOOGLE_MAPS_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
