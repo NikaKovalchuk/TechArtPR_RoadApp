@@ -8,11 +8,7 @@ from django_google_maps.widgets import GoogleMapsAddressWidget
 
 @admin.register(Location)
 class LocationAdmin(ModelAdmin):
-    list_display = ['title', 'rating']
-    search_fields = ('title',)
+    list_display = ['address']
+    search_fields = ('address',)
 
-    fields = ['address', 'geolocation']
-
-    formfield_overrides = {
-        AddressField: {'widget': GoogleMapsAddressWidget(attrs={'data-map-type': 'roadmap'})},
-    }
+    fields = ['address']

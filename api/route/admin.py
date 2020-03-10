@@ -6,7 +6,7 @@ from django.contrib import admin
 
 @admin.register(Route)
 class RouteAdmin(ModelAdmin):
-    list_display = ['title', 'rating', 'updated_at']
+    list_display = ['title', 'rating', 'updated_at', ]
     search_fields = ['title']
-    fields = ['title', 'categories', 'description']
+    fields = ['title', 'categories', 'description', 'locations']
     ordering = ['-updated_at']
