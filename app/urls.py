@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
     url(r'admin/', admin.site.urls),
     url(r'category/', include('api.category.urls')),
     url(r'route/', include('api.route.urls')),
+    url(r'accounts/', include('django.contrib.auth.urls')),
+    url(r'token-auth/', obtain_jwt_token),
 ]
