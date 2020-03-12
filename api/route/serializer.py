@@ -6,18 +6,11 @@ from api.route.models import Route
 
 
 class LocationSerializer(serializers.ModelSerializer):
-    latitude = serializers.SerializerMethodField()
-    longtitude = serializers.SerializerMethodField()
+    def to_representation(self, value):
+        return value.google_key
 
     class Meta:
         model = Location
-        fields = ('latitude', 'longtitude')
-
-    def get_latitude(self, obj):
-        return obj.coordinates[0]
-
-    def get_longtitude(self, obj):
-        return obj.coordinates[1]
 
 
 class CategorySerializer(serializers.ModelSerializer):
