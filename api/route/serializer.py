@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from api.category.models import Category
 from api.locations.models import Location
 from api.route.models import Route
 
@@ -19,8 +20,18 @@ class LocationSerializer(serializers.ModelSerializer):
         return obj.coordinates[1]
 
 
+class CategorySerializer(serializers.ModelSerializer):
+
+    def to_representation(self, value):
+        return value.title
+
+    class Meta:
+        model = Category
+
+
 class RouteSerializer(serializers.ModelSerializer):
-    locations = LocationSerializer(source='location_set', many=True)
+    locations = LocationSerializer(many=True)
+    categories = CategorySerializer(many=True)
 
     class Meta:
         model = Route
