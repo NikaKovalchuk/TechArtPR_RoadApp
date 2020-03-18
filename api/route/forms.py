@@ -9,6 +9,3 @@ class RouteAdminForm(ModelForm):
         model = Route
 
         fields = "__all__"
-        widgets = {
-            'coordinates': GooglePointFieldWidget(settings={"GooglePointFieldWidget": (("zoom", 1),)}),
-        }

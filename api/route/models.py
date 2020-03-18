@@ -33,9 +33,8 @@ class Route(Model):
         locations = route.locations.all()
         summary_rating = 0
         for location in locations:
-            if location.rating:
+            if hasattr(location, "rating"):
                 summary_rating += location.rating
-
         return summary_rating if summary_rating else None
 
     def save(self):

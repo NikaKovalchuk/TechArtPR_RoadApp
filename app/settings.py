@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'django_google_maps',
-    'corsheaders',
+    # 'corsheaders',
 
     "api.route",
     "api.locations",
