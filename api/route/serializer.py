@@ -23,8 +23,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class RouteSerializer(serializers.ModelSerializer):
-    locations = LocationSerializer(many=True)
-    categories = CategorySerializer(many=True)
+    locations = LocationSerializer(many=True, allow_null=True)
+    categories = CategorySerializer(many=True, allow_null=True)
 
     class Meta:
         model = Route

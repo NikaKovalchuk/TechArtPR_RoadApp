@@ -1,3 +1,13 @@
-from django.shortcuts import render
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
+from api.locations.models import Location
 
-# Create your views here.
+
+class LocationList(ListCreateAPIView):
+    queryset = Location.objects.all()
+
+
+class LocationDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Location.objects.all()

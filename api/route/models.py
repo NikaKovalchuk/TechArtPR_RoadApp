@@ -22,7 +22,7 @@ class Route(Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
-    locations = ManyToManyField(Location, blank=True)
+    locations = ManyToManyField(Location, null=True, blank=True)
     categories = ManyToManyField(Category, null=True, blank=True)
 
     def __str__(self):
