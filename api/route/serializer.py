@@ -16,7 +16,7 @@ class LocationSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
 
     def to_representation(self, value):
-        return value.title
+        return value.icon
 
     class Meta:
         model = Category
@@ -31,7 +31,12 @@ class RouteSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        return Route.objects.create(**validated_data)
+        route = Route(validated_data)
+        route.title = validated_data.get('title')
+        route.description = validated_data.get('description')
+        route.save()
+        # route.categories.set(validated_data.get('categories'))
+        # route.save()
 
     def update(self, instance, validated_data):
         instance.title = validated_data.get('title', instance.title)

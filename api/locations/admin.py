@@ -6,7 +6,7 @@ from django.contrib import admin
 
 @admin.register(Location)
 class LocationAdmin(ModelAdmin):
-    list_display = ['address']
-    search_fields = ('address',)
+    list_display = ['google_key']
+    search_fields = ('google_key',)
 
-    fields = ['address']
+    fields = ['google_key']
