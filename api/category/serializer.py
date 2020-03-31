@@ -4,7 +4,6 @@ from api.category.models import Category
 
 
 class CategoryMinSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Category
         fields = [

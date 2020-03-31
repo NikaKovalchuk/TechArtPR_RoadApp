@@ -1,7 +1,6 @@
 from django.db.models import (
     CharField,
     DateTimeField,
-    DecimalField,
     Model,
     TextField,
     ManyToManyField,

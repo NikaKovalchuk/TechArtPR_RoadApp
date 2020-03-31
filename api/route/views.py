@@ -1,3 +1,5 @@
+import logging
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -6,7 +8,6 @@ from api.locations.models import Location
 from api.route.models import Route
 from api.route.serializer import RouteSerializer
 
-import logging
 logger = logging.getLogger(__file__)
 
 

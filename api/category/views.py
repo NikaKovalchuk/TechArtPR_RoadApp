@@ -1,9 +1,10 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
+
 from api.category.models import Category
 from api.category.serializer import CategoryMinSerializer
 

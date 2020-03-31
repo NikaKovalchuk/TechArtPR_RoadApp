@@ -1,7 +1,7 @@
-from api.category.models import Category
-
 from django.contrib import admin
 from django.contrib.admin import ModelAdmin
+
+from api.category.models import Category
 
 
 @admin.register(Category)

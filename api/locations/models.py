@@ -5,7 +5,6 @@ from api.route.models import Route
 
 
 class Location(Model):
-
     google_key = CharField(max_length=1000)
     order = IntegerField()
     route = ForeignKey(Route, on_delete=CASCADE, related_name='locations')

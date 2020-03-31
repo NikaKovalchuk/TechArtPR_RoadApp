@@ -4,8 +4,8 @@ from unittest import mock
 import pytz
 from django.db.utils import DataError, IntegrityError
 from django.test import TestCase
-from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 from .models import Category
 from .serializer import CategoryMinSerializer

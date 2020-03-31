@@ -2,6 +2,7 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+
 from api.locations.models import Location
 
 

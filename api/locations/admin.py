@@ -1,7 +1,7 @@
+from django.contrib import admin
 from django.contrib.admin import ModelAdmin
 
 from api.locations.models import Location
-from django.contrib import admin
 
 
 @admin.register(Location)
