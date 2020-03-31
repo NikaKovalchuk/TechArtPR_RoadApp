@@ -1,11 +1,12 @@
-from rest_framework import serializers
+from rest_framework.relations import PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer
 
 from api.category.models import Category
 from api.locations.models import Location
 from api.route.models import Route
 
 
-class LocationSerializer(serializers.ModelSerializer):
+class LocationSerializer(ModelSerializer):
     def to_representation(self, value):
         return value.google_key
 
@@ -13,35 +14,24 @@ class LocationSerializer(serializers.ModelSerializer):
         model = Location
 
 
-class CategorySerializer(serializers.ModelSerializer):
-
-    def to_representation(self, value):
-        return value.icon
-
-    class Meta:
-        model = Category
-
-
-class RouteSerializer(serializers.ModelSerializer):
+class RouteSerializer(ModelSerializer):
+    categories = PrimaryKeyRelatedField(
+        many=True,
+        allow_null=True,
+        queryset=Category.objects.all()
+    )
     locations = LocationSerializer(many=True, allow_null=True)
-    categories = CategorySerializer(many=True, allow_null=True)
 
     class Meta:
         model = Route
-        fields = '__all__'
+        fields = ['id', 'title', 'description', 'categories', 'locations']
 
-    def create(self, validated_data):
-        route = Route(validated_data)
-        route.title = validated_data.get('title')
-        route.description = validated_data.get('description')
+    def update(self, route, validated_data):
+        route.title = validated_data.get('title', route.title)
+        route.description = validated_data.get('description', route.description)
+        if validated_data.get('locations'):
+            route.locations.set(validated_data.get('locations', route.locations))
+        if validated_data.get('categories'):
+            route.categories.set(validated_data.get('categories', route.categories))
         route.save()
-        # route.categories.set(validated_data.get('categories'))
-        # route.save()
-
-    def update(self, instance, validated_data):
-        instance.title = validated_data.get('title', instance.title)
-        instance.description = validated_data.get('description', instance.description)
-        instance.locations = validated_data.get('locations', instance.locations)
-        instance.save()
-        return instance
-
+        return route

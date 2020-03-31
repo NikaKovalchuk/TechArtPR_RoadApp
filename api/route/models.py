@@ -9,21 +9,18 @@ from django.db.models import (
 )
 
 from api.category.models import Category
-from api.locations.models import Location
 
 
 class Route(Model):
     id = AutoField(primary_key=True)
 
-    title = CharField(max_length=100, null=False)
+    title = CharField(max_length=100)
     description = TextField(max_length=1000, blank=True)
 
-    rating = DecimalField(max_digits=5, decimal_places=1, blank=True, null=True)
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
-    locations = ManyToManyField(Location, null=True, blank=True)
-    categories = ManyToManyField(Category, null=True, blank=True)
+    categories = ManyToManyField(Category, blank=True)
 
     def __str__(self):
         return self.title

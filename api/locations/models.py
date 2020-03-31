@@ -1,11 +1,14 @@
 """Module for Location API."""
-from django.db.models import Model, CharField, DateTimeField, DecimalField
+from django.db.models import Model, CharField, DateTimeField, IntegerField, ForeignKey, CASCADE
+
+from api.route.models import Route
 
 
 class Location(Model):
 
     google_key = CharField(max_length=1000)
-    rating = DecimalField(max_digits=5, decimal_places=1, null=True, blank=True)
+    order = IntegerField()
+    route = ForeignKey(Route, on_delete=CASCADE, related_name='locations')
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)

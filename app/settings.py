@@ -40,26 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'django_google_maps',
-    # 'corsheaders',
 
     "api.route",
     "api.locations",
     "api.category",
 ]
-
-GOOGLE_MAPS_API_KEY = "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y"
-MINSK_COORDINATES = [53.9006011, 27.558972]
-
-MAP_WIDGETS = {
-    "GooglePointFieldWidget": (
-        ("zoom", 15),
-        ("mapCenterLocation", MINSK_COORDINATES),
-        ("markerFitZoom", 15),
-        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'BY'}})
-    ),
-    "GOOGLE_MAP_API_KEY": GOOGLE_MAPS_API_KEY,
-    "LANGUAGE": 'ru',
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']

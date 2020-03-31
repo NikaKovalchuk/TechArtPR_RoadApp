@@ -25,7 +25,9 @@ class ModelTestCase(TestCase):
 
     def test_rating_field_not_required(self):
         """Location rating field not required"""
-        Location.objects.create(google_key="google_key")
+        test = Location.objects.create(google_key="google_key", rating=4)
+        test.rating = None
+        test.save()
 
     def test_str_equal_to_google_key_field(self):
         """Location str equal to google_key field"""
@@ -45,6 +47,9 @@ class ModelTestCase(TestCase):
         with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked)):
             location = Location.objects.create(google_key="test")
             self.assertEqual(location.updated_at, mocked)
+            location.google_key = "test1"
+            location.save()
+            self.assertEqual(location.created_at, mocked)
 
 
 class SerializerTestCase(TestCase):
