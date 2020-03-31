@@ -23,17 +23,3 @@ class Route(Model):
 
     def __str__(self):
         return self.title
-
-    # def calculate_rating(self):
-    #     route = Route.objects.get(id=self.id)
-    #     locations = route.locations.all()
-    #     summary_rating = 0
-    #     for location in locations:
-    #         if hasattr(location, "rating"):
-    #             summary_rating += location.rating
-    #     return summary_rating if summary_rating else None
-    #
-    # def save(self):
-    #     super(Route, self).save()
-    #     self.rating = self.calculate_rating()
-    #     super(Route, self).save()

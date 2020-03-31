@@ -11,7 +11,6 @@ from .models import Category
 from .serializer import CategoryMinSerializer
 from .views import CategoryList, CategoryDetail
 from ..lib.random_string import random_string
-from ..route.serializer import CategorySerializer
 
 
 class ModelTestCase(TestCase):
@@ -62,22 +61,6 @@ class ModelTestCase(TestCase):
         with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked)):
             category = Category.objects.create(title="test")
             self.assertEqual(category.updated_at, mocked)
-
-
-class SerializerTestCase(TestCase):
-
-    def setUp(self):
-        self.category_attributes = {
-            'title': 'title',
-            'icon': 'icon',
-        }
-
-        self.category = Category.objects.create(**self.category_attributes)
-        self.serializer = CategorySerializer(instance=self.category)
-
-    def test_used_fields(self):
-        serializer = CategorySerializer(data=self.category)
-        self.assertFalse(serializer.is_valid())
 
 
 class ViewsTestCase(TestCase):

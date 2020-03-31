@@ -23,11 +23,12 @@ class ModelTestCase(TestCase):
             test.google_key = None
             test.save()
 
-    def test_rating_field_not_required(self):
-        """Location rating field not required"""
-        test = Location.objects.create(google_key="google_key", rating=4)
-        test.rating = None
-        test.save()
+    def test_order_field_required(self):
+        """Location order field required"""
+        test = Location.objects.create(google_key="google_key", order=4)
+        with self.assertRaises(IntegrityError):
+            test.order = None
+            test.save()
 
     def test_str_equal_to_google_key_field(self):
         """Location str equal to google_key field"""

@@ -6,6 +6,7 @@ from django.db.utils import IntegrityError, DataError
 from django.test import TestCase
 
 from .models import Route
+from .serializer import RouteSerializer
 from ..lib.random_string import random_string
 
 
@@ -40,18 +41,6 @@ class ModelTestCase(TestCase):
         test.description = None
         test.save()
 
-    def test_description_field_max_size_is_1000(self):
-        """Category description field max size is 1000"""
-        test = random_string(1001)
-        with self.assertRaises(DataError):
-            Route.objects.create(description=test)
-
-    def test_rating_field_not_required(self):
-        """Route rating field not required"""
-        test = Route.objects.create(title="213123")
-        test.rating = None
-        test.save()
-
     def test_create_at_use_auto_add_now(self):
         """Route create_at use auto_add_now"""
         mocked = datetime.datetime(2018, 4, 4, 0, 0, 0, tzinfo=pytz.utc)
@@ -60,7 +49,7 @@ class ModelTestCase(TestCase):
             self.assertEqual(route.created_at, mocked)
 
     def test_updated_at_use_auto_add_now(self):
-        """Location updated_at use auto_add"""
+        """Route updated_at use auto_add"""
         mocked = datetime.datetime(2018, 4, 4, 0, 0, 0, tzinfo=pytz.utc)
         with mock.patch('django.utils.timezone.now', mock.Mock(return_value=mocked)):
             route = Route.objects.create(title="test")
@@ -68,3 +57,21 @@ class ModelTestCase(TestCase):
             route.title = "test1"
             route.save()
             self.assertEqual(route.created_at, mocked)
+
+
+class SerializerTestCase(TestCase):
+
+    def setUp(self):
+        self.route_attributes = {
+            'title': 'title',
+            'description': 'description',
+            'categories': [],
+            'locations': [],
+        }
+
+        self.route = Route.objects.create(**self.route_attributes)
+        self.serializer = RouteSerializer(instance=self.route)
+
+    def test_used_fields(self):
+        serializer = RouteSerializer(data=self.route)
+        self.assertTrue(serializer.is_valid())
