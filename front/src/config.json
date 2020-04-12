@@ -1,0 +1,12 @@
+{
+  "API_ROOT": "http://0.0.0.0:8000/",
+  "GOOGLE_ROOT": "https://maps.googleapis.com/maps/api/",
+  "GOOGLE_PLACE": "place/details/json?",
+  "PLACE_ID": "placeid=",
+  "LOCATION_DATAILS": "&fields=name",
+  "GOOGLE_KEY_VALUE": "AIzaSyAInnquI6eUV_HmxHK3sJO2IXoG_l4Nv_Y",
+  "GOOGLE_KEY_FIELD": "&key=",
+  "MAP_ZOOM": 17,
+  "MAP_CENTER_LAT": 53.893009,
+  "MAP_CENTER_LNG": 27.567444
+}

@@ -7,13 +7,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: api
-  migration:
-    build: .
-    command: python manage.py migrate
-    volumes:
-      - .:/code
-    depends_on:
-      - db
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -23,4 +16,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
-      - migration
+  frontend:
+    build: ./front
+    command: npm run start
+    depends_on:
+      - web
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/fronend/src
