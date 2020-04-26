@@ -1,10 +1,4 @@
-// function makeMarker(map, maps, position, idx) {
-//     new maps.Marker({
-//         position: position,
-//         map: map,
-//         label: String.fromCharCode(97 + idx).toUpperCase()
-//     });
-// }
+let Display = null;
 
 export default function (map, maps, locations, draggable = true) {
     const directionsService = new maps.DirectionsService(map);
@@ -20,6 +14,10 @@ export default function (map, maps, locations, draggable = true) {
     })) : [];
 
     map.setOptions({center: locations[0].location,});
+    if (Display != null) {
+        Display.setMap(null);
+        Display = null;
+    }
     directionsService.route(
         {
             origin: origin,
@@ -29,13 +27,11 @@ export default function (map, maps, locations, draggable = true) {
         },
         (results, status) => {
             if (status === 'OK') {
-                new maps.DirectionsRenderer({
+                Display = new maps.DirectionsRenderer({
                     map: map,
                     directions: results,
                     draggable: draggable,
                 });
-                // if (!draggable) return;
-                // locations.forEach((location, idx) => makeMarker(map, maps, location.location, idx))
             }
         });
 };

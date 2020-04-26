@@ -23,19 +23,34 @@ class Map extends Component {
         this.onMapUpdate()
     };
 
+    updateLocation = location => {
+      const location_ids = this.state.locations.map(l => l.id)
+      const locations = this.state.locations
+      const includes = location_ids.includes(location.place_id);
+
+      if (includes){
+        const index = location_ids.indexOf(location.place_id);
+        if (index !== -1) locations.splice(index, 1);
+        this.setState({locations});
+      }
+      else {
+        this.setState({
+          locations: [...this.state.locations, {
+              location: location.geometry.location,
+              id: location.place_id
+            }]
+        });
+      }
+    };
+
     onClick = (location) => {
         const {maps, map} = this.state;
         if (!this.props.onClick || !maps) return;
         loadLocation(map, maps, location, (location) => {
-            location && this.setState({
-                locations: [...this.state.locations, {
-                    location: location.geometry.location,
-                    id: location.place_id
-                }]
-            });
+            location && this.updateLocation(location);
             this.props.onClick(this.state.locations);
             this.onLocationsUpdate(this.state.locations);
-        });
+      });
     };
 
     sortLocations = (a, b) => {
