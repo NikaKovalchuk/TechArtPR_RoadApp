@@ -1,10 +1,13 @@
 from django.db.models import (
+    AutoField,
     CharField,
     DateTimeField,
+    ForeignKey,
     Model,
-    TextField,
     ManyToManyField,
-    AutoField,
+    IntegerField,
+    TextField,
+    CASCADE,
 )
 
 from api.category.models import Category

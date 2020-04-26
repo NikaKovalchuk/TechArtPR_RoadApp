@@ -7,12 +7,12 @@ from django.db.utils import (
     DataError,
 )
 from django.test import TestCase
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from .models import Route
-from .serializer import RouteSerializer, ListRouteSerializer
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework import filters
+from .serializer import ListRouteSerializer
 from .views import RouteDetail, RouteList
 from ..lib.random_string import random_string
 

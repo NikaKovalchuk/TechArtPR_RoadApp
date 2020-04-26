@@ -1,17 +1,17 @@
 import datetime
-from unittest import mock
-
 import pytz
+
 from django.db.utils import IntegrityError
 from django.test import TestCase
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from unittest import mock
 
 from .models import Location
-from ..route.serializer import LocationSerializer
 from .views import LocationDetail, LocationList
+from ..route.serializer import LocationSerializer
 
 
 class ModelTestCase(TestCase):
@@ -71,6 +71,7 @@ class ModelTestCase(TestCase):
             location.google_key = "test1"
             location.save()
             self.assertEqual(location.created_at, mocked)
+
 
 class ViewsTestCase(TestCase):
 

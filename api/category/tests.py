@@ -1,15 +1,15 @@
 import datetime
-from unittest import mock
-
 import pytz
+
 from django.db.utils import DataError, IntegrityError
-from django.test import TestCase
 from django_filters.rest_framework import DjangoFilterBackend
+from django.test import TestCase
 from rest_framework import filters
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+from unittest import mock
 
 from .models import Category
 from .serializer import CategoryMinSerializer

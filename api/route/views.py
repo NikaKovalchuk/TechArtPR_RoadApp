@@ -10,7 +10,6 @@ from api.route.serializer import RouteSerializer, ListRouteSerializer
 
 logger = logging.getLogger(__file__)
 
-
 def get_request_data(data, route_id=None):
     locations = []
     if data.get("locations"):

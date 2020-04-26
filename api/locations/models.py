@@ -1,10 +1,10 @@
 """Module for Location API."""
 from django.db.models import (
-    Model,
     CharField,
     DateTimeField,
-    IntegerField,
     ForeignKey,
+    Model,
+    IntegerField,
     CASCADE,
 )
 

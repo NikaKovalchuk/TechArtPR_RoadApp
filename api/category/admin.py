@@ -3,7 +3,6 @@ from django.contrib.admin import ModelAdmin
 
 from api.category.models import Category
 
-
 @admin.register(Category)
 class CategoryAdmin(ModelAdmin):
     list_display = ['title', 'icon', 'updated_at']
