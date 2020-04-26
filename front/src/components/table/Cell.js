@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TableCell from '@material-ui/core/TableCell';
-import {Icon} from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
 
 class Cell extends Component {
     render() {

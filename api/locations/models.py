@@ -7,7 +7,7 @@ from api.route.models import Route
 class Location(Model):
     google_key = CharField(max_length=1000)
     order = IntegerField()
-    route = ForeignKey(Route, on_delete=CASCADE, related_name='locations')
+    route = ForeignKey(Route, on_delete=CASCADE, related_name='locations', null=True)
 
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)

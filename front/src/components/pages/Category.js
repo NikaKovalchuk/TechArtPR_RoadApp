@@ -23,7 +23,7 @@ class Category extends Component {
     componentWillReceiveProps = (nextProps) => {
         const category = nextProps.category;
         const id = this.props.match.params.id;
-        id && this.setState({title: category.title, icon: category.icon})
+        id && category && this.setState({title: category.title, icon: category.icon})
     };
 
     redirect = () => {
@@ -42,14 +42,14 @@ class Category extends Component {
 
     onDeleteCategory = () => {
         this.props.deleteCategory(this.props.category.id);
-        this.redirect()
     };
 
     render() {
         const {category, classes} = this.props;
         const id = this.props.match.params.id;
+        id && category && !category.title && this.redirect();
         return (
-            <Container style={{width: '100%'}}>
+            <Container maxWidth="xl">
                 <Title
                     classes={classes}
                     title={category ? "Редактровать категорию " + category.title : "Создать новую"}
@@ -68,6 +68,8 @@ class Category extends Component {
                         label={"Icon"}
                         onInput={event => this.setState({icon: event.target.value})}
                         value={this.state.icon}
+                        classes={classes}
+                        helpText={"Используйте названия с сайта https://material-ui.com/components/material-icons/"}
                     />
                     <Button
                         type="submit"

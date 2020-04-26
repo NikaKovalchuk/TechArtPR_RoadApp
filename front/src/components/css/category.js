@@ -11,6 +11,7 @@ export const categoryStyles = theme => ({
         marginTop: "1%",
     },
     submit: {
+        marginTop: "10px",
         background: "black",
         color: "white",
     },
@@ -26,5 +27,8 @@ export const categoryStyles = theme => ({
         display: "inline",
         float: "left",
         paddingRight: "30px",
+    },
+    help: {
+        color: "grey",
     }
 });
