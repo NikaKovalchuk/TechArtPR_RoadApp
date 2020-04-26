@@ -1,5 +1,12 @@
 """Module for Location API."""
-from django.db.models import Model, CharField, DateTimeField, IntegerField, ForeignKey, CASCADE
+from django.db.models import (
+    Model,
+    CharField,
+    DateTimeField,
+    IntegerField,
+    ForeignKey,
+    CASCADE,
+)
 
 from api.route.models import Route
 

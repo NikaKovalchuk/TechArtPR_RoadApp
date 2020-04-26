@@ -2,11 +2,18 @@ import datetime
 from unittest import mock
 
 import pytz
-from django.db.utils import IntegrityError, DataError
+from django.db.utils import (
+    IntegrityError,
+    DataError,
+)
 from django.test import TestCase
 
 from .models import Route
-from .serializer import RouteSerializer
+from .serializer import RouteSerializer, ListRouteSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import filters
+from .views import RouteDetail, RouteList
 from ..lib.random_string import random_string
 
 
@@ -28,7 +35,7 @@ class ModelTestCase(TestCase):
         """Route title field max size is 100"""
         test = random_string(101)
         with self.assertRaises(DataError):
-            Route.objects.create(title=test, icon="test")
+            Route.objects.create(title=test, description="test")
 
     def test_has_description_field(self):
         """Route has description field"""
@@ -38,7 +45,7 @@ class ModelTestCase(TestCase):
     def test_description_field_is_not_required(self):
         """Route description field is not required"""
         test = Route.objects.create(description="description")
-        test.description = None
+        test.description = ""
         test.save()
 
     def test_create_at_use_auto_add_now(self):
@@ -59,19 +66,22 @@ class ModelTestCase(TestCase):
             self.assertEqual(route.created_at, mocked)
 
 
-class SerializerTestCase(TestCase):
+class ViewsTestCase(TestCase):
 
-    def setUp(self):
-        self.route_attributes = {
-            'title': 'title',
-            'description': 'description',
-            'categories': [],
-            'locations': [],
-        }
+    def test_view_list_fields(self):
+        list = RouteList()
+        self.assertEqual(list.serializer_class, ListRouteSerializer)
+        self.assertEqual(list.filter_backends, [filters.SearchFilter, filters.OrderingFilter, DjangoFilterBackend])
+        self.assertEqual(list.search_fields, ['title'])
+        self.assertEqual(list.ordering_fields, '__all__')
+        self.assertEqual(list.ordering, ['-updated_at'])
 
-        self.route = Route.objects.create(**self.route_attributes)
-        self.serializer = RouteSerializer(instance=self.route)
+    def test_view_detail_fields(self):
+        list = RouteList()
+        self.assertEqual(list.serializer_class, ListRouteSerializer)
 
-    def test_used_fields(self):
-        serializer = RouteSerializer(data=self.route)
-        self.assertTrue(serializer.is_valid())
+    def test_view_list_bases_is_list_create_view(self):
+        self.assertEquals(RouteList.__bases__, (ListCreateAPIView,))
+
+    def test_view_detail_bases_is_retrieve_ud_view(self):
+        self.assertEquals(RouteDetail.__bases__, (RetrieveUpdateDestroyAPIView,))

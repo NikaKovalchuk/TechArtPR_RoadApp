@@ -6,6 +6,10 @@ from django.db.utils import DataError, IntegrityError
 from django.test import TestCase
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+)
 
 from .models import Category
 from .serializer import CategoryMinSerializer
@@ -17,12 +21,12 @@ class ModelTestCase(TestCase):
 
     def test_category_has_title_field(self):
         """Category has title field"""
-        title = Category.objects.create(title="title", icon="title")
-        self.assertIsNotNone(title.title)
+        category = Category.objects.create(title="title")
+        self.assertIsNotNone(category.title)
 
     def test_title_field_is_required(self):
         """Category title field is required"""
-        test = Category.objects.create(title="test", icon="test")
+        test = Category.objects.create(title="test")
         with self.assertRaises(IntegrityError):
             test.title = None
             test.save()
@@ -35,7 +39,8 @@ class ModelTestCase(TestCase):
 
     def test_icon_field_is_not_required(self):
         """Category icon field is not required"""
-        Category.objects.create(title="test")
+        category = Category.objects.create(title="test")
+        self.assertEquals(category.icon, '')
 
     def test_icon_field_max_size_is_100(self):
         """Category icon field max size is 100"""
@@ -76,3 +81,9 @@ class ViewsTestCase(TestCase):
     def test_category_detail_view_list_fields(self):
         list = CategoryDetail()
         self.assertEqual(list.serializer_class, CategoryMinSerializer)
+
+    def test_category_view_list_bases_is_list_create_view(self):
+        self.assertEquals(CategoryList.__bases__, (ListCreateAPIView,))
+
+    def test_category_view_detail_bases_is_retrieve_ud_view(self):
+        self.assertEquals(CategoryDetail.__bases__, (RetrieveUpdateDestroyAPIView,))

@@ -11,6 +11,3 @@ class CategoryMinSerializer(serializers.ModelSerializer):
             'title',
             'icon'
         ]
-
-    def create(self, validated_data):
-        return Category.objects.create(**validated_data)
