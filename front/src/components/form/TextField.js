@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
-import TextField from '@material-ui/core/TextField';
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
+import { TextField, Container, Typography } from '@material-ui/core';
 
 class Field extends Component {
-
     render() {
         const {label, helpText, classes} = this.props;
         return (

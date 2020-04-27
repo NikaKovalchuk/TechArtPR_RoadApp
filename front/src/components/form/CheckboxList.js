@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 
-
 class CheckboxList extends Component {
     render() {
         const {items, onChange, checked} = this.props;
+        
         return (
             <div>
                 {items.map(item => (

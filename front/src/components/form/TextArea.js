@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import TextField from './TextField';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
-
 class TextArea extends Component {
     render() {
         const {value, onInput, title} = this.props;
@@ -10,8 +9,8 @@ class TextArea extends Component {
             <FormControlLabel
                 control={
                     <TextField
-                        name={title ? title : "description"}
-                        label={title ? title : "Описание"}
+                        name={!!title ? title : "description"}
+                        label={!!title ? title : "Описание"}
                         onInput={onInput}
                         value={value}
                         multiline

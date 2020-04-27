@@ -2,22 +2,17 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Button from "@material-ui/core/Button";
 import withStyles from "@material-ui/core/styles/withStyles";
+
 import {addRoute, updateRoute} from "../../state/actions/route";
 import {routeStyles} from "../css/route";
 
 class RouteFormButton extends Component {
-
-    onSubmit = () => {
-        const {locations, id, data, history, updateRoute, addRoute} = this.props;
-        console.log(locations)
+    onSubmit = (event) => {
+        const {id, locations, data, history, updateRoute, addRoute} = this.props;
         const locationList = locations.map(location => location.id);
         const body = {locations: locationList, ...data};
-        if (id) {
-            updateRoute(id, body);
-        } else {
-            addRoute(body);
-        }
-        history.push("/");
+
+        !!id ? updateRoute(id, body) : addRoute(body);
     };
 
     render() {
