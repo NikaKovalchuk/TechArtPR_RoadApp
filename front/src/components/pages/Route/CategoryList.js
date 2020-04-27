@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Icon} from '@material-ui/core';
 
 class CategoryList extends Component {
-
     render() {
         const {list} = this.props;
         return (

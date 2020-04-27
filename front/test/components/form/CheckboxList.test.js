@@ -20,8 +20,7 @@ beforeEach(() => {
   wrapper = shallow(<CheckboxList {...props} /> );
 });
 
-
-describe('<CheckboxList /> rendering', () => {  
+describe('<CheckboxList /> rendering', () => {
   it('should render 2 <FormControlLabel />', () => {
     expect(wrapper.find(FormControlLabel)).toHaveLength(2);
   });

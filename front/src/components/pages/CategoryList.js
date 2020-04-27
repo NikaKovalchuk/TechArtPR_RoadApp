@@ -7,9 +7,7 @@ import {categoryStyles} from "../css/category";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Container from "@material-ui/core/Container";
 
-
 class CategoryList extends Component {
-
     componentDidMount = () => this.props.loadCategories();
 
     onEditCategory = (id) => {

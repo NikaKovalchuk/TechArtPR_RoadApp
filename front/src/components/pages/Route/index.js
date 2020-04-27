@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import Table from "../../table";
+import { Typography, Container } from "@material-ui/core";
 import {connect} from "react-redux";
-import Typography from "@material-ui/core/Typography";
 import CategoryList from "./CategoryList";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {routeStyles} from "../../css/route";
 import {deleteRoute, fetchRoute} from "../../../state/actions/route";
-import Container from "@material-ui/core/Container";
 import Title from "../../form/Title";
 import Map from "../../Map";
 
 class Index extends Component {
-
     componentDidMount = () => {
         const id = this.props.match.params.id;
         id && this.props.loadRoute(id);
@@ -32,6 +30,7 @@ class Index extends Component {
     render() {
         const {locations, schema, route, classes} = this.props;
         const validLocations = !!route.locations && !!route.locations.length;
+
         return (
             <Container maxWidth="xl">
                 {validLocations && <Map locationKeys={route.locations} draggable={false}/>}
